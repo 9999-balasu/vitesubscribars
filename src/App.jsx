@@ -1,6 +1,53 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { addSubscriber, likeSubscriber } from './features/subscriberSlice';
+import './App.css';
+
+function App() {
+  const dispatch = useDispatch();
+  const { count, names } = useSelector((state) => state.subscriber);
+  const [name, setName] = useState('');
+
+  const handleAddSubscriber = () => {
+    if (name.trim()) {
+      dispatch(addSubscriber(name));
+      setName('');
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>Subscribers</h1>
+      <p className="count">Total Subscribers: {count}</p>
+      <div className="input-group">
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Enter subscriber name"
+        />
+        <button onClick={handleAddSubscriber}>Add Subscriber</button>
+      </div>
+      <ul className="subscriber-list">
+        {names.map((sub, index) => (
+          <li key={index} className="subscriber-item">
+            <span>{sub.name} <span className="badge">{sub.badge}</span></span>
+            <span className="joined-at">Joined: {sub.joinedAt}</span>
+            <div className="like-section">
+              <button className="like-button" onClick={() => dispatch(likeSubscriber(index))}>❤️ {sub.likes}</button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+
+/*import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { addSubscriber } from './features/subscriberSlice';
 import './App.css';
 
@@ -50,7 +97,7 @@ Now, each subscriber will receive a badge based on their count:</h3>
   );
 }
 
-export default App;
+export default App;*/
 
 
 /*import { useDispatch } from 'react-redux';

@@ -1,12 +1,5 @@
 
-
-
-
-
-
-
-
-.container {
+/*.container {
   text-align: center;
   padding: 20px;
   max-width: 500px;
@@ -75,6 +68,106 @@ button:hover {
   font-weight: bold;
 }
 
+.like-button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .input-group {
+    flex-direction: column;
+  }
+  input {
+    width: 100%;
+  }
+}*/
+
+
+.container {
+  text-align: center;
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+}
+
+.count {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+input {
+  padding: 10px;
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.subscriber-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.subscriber-item {
+  background: white;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.joined-at {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .input-group {
     flex-direction: column;
@@ -83,3 +176,13 @@ button:hover {
     width: 100%;
   }
 }
+
+
+
+
+
+
+
+
+
+
