@@ -1,0 +1,53 @@
+
+
+
+
+
+.container {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.count {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.input-group {
+  margin: 20px 0;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 200px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.subscriber-list {
+  list-style: none;
+  padding: 0;
+}
+
+.subscriber-list li {
+  background: #f8f9fa;
+  margin: 5px auto;
+  padding: 10px;
+  border-radius: 5px;
+  width: 50%;
+}
