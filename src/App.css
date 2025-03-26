@@ -1,36 +1,44 @@
 
 
-
-
-
 .container {
   text-align: center;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: auto;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
 }
 
 .count {
+  font-size: 1.2rem;
   font-weight: bold;
   color: #007bff;
 }
 
 .input-group {
-  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 input {
   padding: 10px;
+  width: 60%;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 10px;
-  width: 200px;
 }
 
 button {
   padding: 10px 15px;
+  border: none;
   background-color: #007bff;
   color: white;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -42,12 +50,22 @@ button:hover {
 .subscriber-list {
   list-style: none;
   padding: 0;
+  margin-top: 20px;
 }
 
 .subscriber-list li {
-  background: #f8f9fa;
-  margin: 5px auto;
+  background: white;
   padding: 10px;
+  margin: 5px 0;
   border-radius: 5px;
-  width: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  .input-group {
+    flex-direction: column;
+  }
+  input {
+    width: 100%;
+  }
 }
