@@ -67,7 +67,7 @@ export default App;*/
 
 
 
-import { useDispatch, useSelector } from 'react-redux';
+/*import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { addSubscriber, likeSubscriber, addComment } from './features/subscriberSlice';
 import './App.css';
@@ -147,7 +147,7 @@ function App() {
   );
 }
 
-export default App;
+export default App;*/
 
 /*import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -292,3 +292,196 @@ function App() {
 }
 
 export default App;*/
+/*import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { addSubscriber, likeSubscriber } from './features/subscriberSlice';
+import './App.css';
+
+function App() {
+  const dispatch = useDispatch();
+  const { count, names } = useSelector((state) => state.subscriber);
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('Fetching location...');
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation(`Lat: ${latitude.toFixed(2)}, Long: ${longitude.toFixed(2)}`);
+        },
+        () => {
+          setLocation('Location access denied');
+        }
+      );
+    }
+  }, []);
+
+  const handleAddSubscriber = () => {
+    if (name.trim()) {
+      if (location === 'Fetching location...') {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            const updatedLocation = `Lat: ${latitude.toFixed(2)}, Long: ${longitude.toFixed(2)}`;
+            setLocation(updatedLocation);
+            dispatch(addSubscriber({ name, location: updatedLocation }));
+          },
+          () => {
+            setLocation('Location access denied');
+            dispatch(addSubscriber({ name, location: 'Location access denied' }));
+          }
+        );
+      } else {
+        dispatch(addSubscriber({ name, location }));
+      }
+      setName('');
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>Subscribers</h1>
+      <p className="count">Total Subscribers: {count}</p>
+      <div className="input-group">
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Enter subscriber name"
+        />
+        <button onClick={handleAddSubscriber}>Add Subscriber</button>
+      </div>
+      <ul className="subscriber-list">
+        {names.map((sub, index) => (
+          <li key={index} className="subscriber-item">
+            <span>{sub.name} <span className="badge">{sub.badge}</span></span>
+            <span className="joined-at">Joined: {sub.joinedAt}</span>
+            <span className="location">📍 {sub.location}</span>
+            <div className="like-section">
+              <button className="like-button" onClick={() => dispatch(likeSubscriber(index))}>❤️ {sub.likes}</button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;*/
+
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { addSubscriber, likeSubscriber, removeSubscriber, addComment } from './features/subscriberSlice';
+import './App.css';
+
+function App() {
+  const dispatch = useDispatch();
+  const { count, names, comments } = useSelector((state) => state.subscriber);
+  const [name, setName] = useState('');
+  const [comment, setComment] = useState('');
+  const [commenterName, setCommenterName] = useState('');
+  const [location, setLocation] = useState('Fetching location...');
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation(`Lat: ${latitude.toFixed(2)}, Long: ${longitude.toFixed(2)}`);
+        },
+        () => {
+          setLocation('Location access denied');
+        }
+      );
+    }
+  }, []);
+
+  const handleAddSubscriber = () => {
+    if (name.trim()) {
+      if (location === 'Fetching location...') {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            const updatedLocation = `Lat: ${latitude.toFixed(2)}, Long: ${longitude.toFixed(2)}`;
+            setLocation(updatedLocation);
+            dispatch(addSubscriber({ name, location: updatedLocation }));
+          },
+          () => {
+            setLocation('Location access denied');
+            dispatch(addSubscriber({ name, location: 'Location access denied' }));
+          }
+        );
+      } else {
+        dispatch(addSubscriber({ name, location }));
+      }
+      setName('');
+    }
+  };
+
+  const handleAddComment = () => {
+    if (commenterName.trim() && comment.trim()) {
+      dispatch(addComment({ name: commenterName, comment }));
+      setComment('');
+      setCommenterName('');
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>Subscribers</h1>
+      <p className="count">Total Subscribers: {count}</p>
+      <div className="input-group">
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Enter subscriber name"
+        />
+        <button onClick={handleAddSubscriber}>Add Subscriber</button>
+      </div>
+      <ul className="subscriber-list">
+        {names.map((sub, index) => (
+          <li key={index} className="subscriber-item">
+            <span>{sub.name} <span className="badge">{sub.badge}</span></span>
+            <span className="joined-at">Joined: {sub.joinedAt}</span>
+            <span className="location">📍 {sub.location}</span>
+            <div className="action-buttons">
+              <button className="like-button" onClick={() => dispatch(likeSubscriber(index))}>❤️ {sub.likes}</button>
+              <button className="remove-button" onClick={() => dispatch(removeSubscriber(index))}>❌ Remove</button>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <h2>Comments</h2>
+      <div className="input-group">
+        <input
+          type="text"
+          value={commenterName}
+          onChange={(e) => setCommenterName(e.target.value)}
+          placeholder="Enter your name"
+        />
+        <input
+          type="text"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Enter your comment"
+        />
+        <button onClick={handleAddComment}>Submit Comment</button>
+      </div>
+      <ul className="comment-list">
+        {comments.map((cmt, index) => (
+          <li key={index} className="comment-item">
+            <span><strong>{cmt.name}:</strong> {cmt.comment}</span>
+            <span className="comment-time">🕒 {cmt.createdAt}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+
